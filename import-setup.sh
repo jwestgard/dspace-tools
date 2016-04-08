@@ -26,7 +26,6 @@ if [ ! -f $FILE ]; then
 fi
 mkdir -p "$OUTDIR"
 mv $FILE "$OUTDIR/$FILE"
-chmod +r "$OUTDIR/$FILE"
 echo "$FILE" > "$OUTDIR/contents" && echo "  - created contents file;"
 echo "$HANDLE" > "$OUTDIR/handle" && echo "  - created handle file;"
 
