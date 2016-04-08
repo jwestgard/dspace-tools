@@ -13,9 +13,7 @@
 #==============================================================================
 FILE=$1
 HANDLE=$2
-HOST=$(hostname)
 OUTDIR="load$(date +%Y%m%d)/item1"
-URL="http://$HOST:8084/$HANDLE"
 DC="$OUTDIR/dublin_core.xml"
 
 #----------------------------------------------------------------------
@@ -37,7 +35,7 @@ echo "$HANDLE" > "$OUTDIR/handle" && echo "  - created handle file;"
 #----------------------------------------------------------------------
 echo '<?xml version="1.0" encoding="utf-8" standalone="no"?>' > "$DC"
 echo '<dublin_core schema="dc">' >> "$DC"
-echo "<dcvalue element=\"identifier\" qualifier=\"uri\">$URL</dcvalue>" >> "$DC"
+echo "<dcvalue element=\"identifier\" qualifier=\"uri\">$HANDLE</dcvalue>" >> "$DC"
 echo '</dublin_core>' >> "$DC"
 echo "  - created dublin_core.xml;"
 echo "Done."
