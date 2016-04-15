@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 #==============================================================================
 #
-#         FILE:  etd-xml.py
-#        USAGE:  ./etd-xml.py [path/to/input/*.xml] > [output.csv]
+#         FILE:  etd-meta.py
+#        USAGE:  ./etd-meta.py [path/to/input/*.xml] > [output.csv]
 #  DESCRIPTION:  Extract metadata necessary for creation of a SAF batch
 #                via the SAF builder and write the data to a CSV file.
 #       AUTHOR:  Joshua A. Westgard
