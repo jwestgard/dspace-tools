@@ -20,9 +20,9 @@ CSVMAP = {
     'AuthorFullName': 'dc.contributor.author',
     'DegreeYear': 'dc.date.issued',
     'DissLanguage': 'dc.language.iso', 
-    'SubjectGroupDesc': 'dc.subject',
+#    'SubjectGroupDesc': 'dc.subject',
     'SubjectDesc': 'dc.subject',
-    'Keyword': 'dc.subject',
+#    'Keyword': 'dc.subject',
     'Title': 'dc.title',
     'DegreeCode': 'dc.type'
     }
