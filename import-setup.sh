@@ -43,7 +43,6 @@ mkdir -p "$BATCHDIR/item_1" && echo "  - created output dirs;"
 touch "$BATCHDIR/item_1/contents" && echo "  - created contents file;"
 echo $HANDLE >> "$BATCHDIR/item_1/handle" && echo "  - created handle file;"
 
-
 #----------------------------------------------------------------------
 # move file or files into position inside SAF directories
 #----------------------------------------------------------------------
@@ -62,14 +61,14 @@ elif [[ -d "$FILEPATH" ]]; then
     done
 fi 
 
-
 #----------------------------------------------------------------------
 # create minimal dublin_core.xml containing URL of obj to be updated
 #----------------------------------------------------------------------
 echo "Creating dublin_core.xml ..."
-echo '<?xml version="1.0" encoding="utf-8" standalone="no"?>' > "$DC"
-echo '<dublin_core schema="dc">' >> "$DC"
-echo "  <dcvalue element=\"identifier\"\
- qualifier=\"uri\">$HANDLE</dcvalue>" >> "$DC"
-echo '</dublin_core>' >> "$DC"
+cat >"$DC" <<END
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<dublin_core schema="dc">
+  <dcvalue element="identifier" qualifier="uri">$HANDLE</dcvalue>
+</dublin_core>
+END
 echo "Done."
