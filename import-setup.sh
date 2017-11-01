@@ -61,7 +61,7 @@ fi
 #----------------------------------------------------------------------
 # create minimal dublin_core.xml containing URL of obj to be updated
 #----------------------------------------------------------------------
-echo "Creating dublin_core.xml"
+echo "Creating dublin_core.xml ..."
 echo '<?xml version="1.0" encoding="utf-8" standalone="no"?>' > "$DC"
 echo '<dublin_core schema="dc">' >> "$DC"
 echo "  <dcvalue element=\"identifier\"\
