@@ -53,7 +53,7 @@ if [[ -f "$FILEPATH" ]]; then
 elif [[ -d "$FILEPATH" ]]; then
     echo "  - $FILEPATH is a directory; moving files:"
     count=1
-    for item in "$FILEPATH"/*; do
+    for item in $(find "$FILEPATH" -type f); do
         if [[ -f $item ]]; then
             move_file "$item" && echo "    $count. Moving $item"
             (( count += 1 ))
