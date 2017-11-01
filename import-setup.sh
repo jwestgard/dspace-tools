@@ -19,11 +19,21 @@ HANDLE=$2
 BATCHDIR="load$(date +%Y%m%d)"
 DC="$BATCHDIR/item_1/dublin_core.xml"
 
-if [[ -e $BATCHDIR ]]; then
+if [[ -e "$BATCHDIR" ]]; then
     echo "Output directory exists. Exiting..."
     exit 1
 fi
 
+if [[ ! -e "$FILEPATH" ]]; then
+    echo "File path does not exist. Exiting..."
+    exit 1
+fi
+
+function move_file {
+    ITEMPATH=$1
+    mv "$ITEMPATH" "$BATCHDIR/item_1"
+    basename "$ITEMPATH" >> "$BATCHDIR/item_1/contents"
+}
 
 #----------------------------------------------------------------------
 # set up SAF package structure
@@ -38,24 +48,19 @@ echo $HANDLE >> "$BATCHDIR/item_1/handle" && echo "  - created handle file;"
 # move file or files into position inside SAF directories
 #----------------------------------------------------------------------
 echo "Checking $FILEPATH ..."
-if [[ -f $FILEPATH ]]; then
-    echo "  - $FILEPATH is a single file."
-    exit 0
-else
-    if [[ -d "$FILEPATH" ]]; then
-        echo "  - $FILEPATH is a directory; moving files:"
-        count=1
-        for item in "$FILEPATH"/*; do
-            if [[ -f $item ]]; then
-                mv $item "$BATCHDIR/item_1" && 
-                  echo "    $count. Moving $item"
-                echo $(basename "$item") >> "$BATCHDIR/item_1/contents" && 
-                  echo "      - appending filename to contents list."
-                (( count += 1 ))
-            fi
-        done
-    fi 
-fi
+if [[ -f "$FILEPATH" ]]; then
+    echo "  - $FILEPATH is a single file; moving it:"
+    move_file "$FILEPATH" && echo "    File moved."
+elif [[ -d "$FILEPATH" ]]; then
+    echo "  - $FILEPATH is a directory; moving files:"
+    count=1
+    for item in "$FILEPATH"/*; do
+        if [[ -f $item ]]; then
+            move_file "$item" && echo "    $count. Moving $item"
+            (( count += 1 ))
+        fi
+    done
+fi 
 
 
 #----------------------------------------------------------------------
